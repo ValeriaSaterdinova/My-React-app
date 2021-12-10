@@ -5,29 +5,32 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './App.scss';
 
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:8000/allTasks').then(res => {
       setTasks(res.data.data);
-    })
+    });
   }, [])
 
   const addNewTask = async () => {
-    await axios.post('http://localhost:8000/createTask', {
-      text,
-      isCheck: false
-    }).then(res => {
-      tasks.push(res.data.data);
-      setText('')
-      setTasks([...tasks]);
-    })
+    if (text.trim()) {
+      await axios.post('http://localhost:8000/createTask', {
+        text: text.trim(),
+        isCheck: false
+      }).then(res => {
+        tasks.push(res.data.data);
+        setText('');
+        setTasks([...tasks]);
+      });
+    } else {
+      alert("Please, add text!")
+    }
   }
-
   return (
-    <div>
+    <div className='content'>
       <header>
         <h1>To-Do List</h1>
         <div className='added'>
@@ -40,7 +43,8 @@ function App() {
           <Button
             variant='contained'
             onClick={() => addNewTask()}
-          > Add
+          >
+            Add
           </Button>
         </div>
       </header>

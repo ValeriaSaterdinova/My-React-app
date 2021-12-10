@@ -9,7 +9,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Task = ({ task, index, setTasks }) => {
-  const { _id, isCheck } = task;
+  const { _id, isCheck, text: word } = task;
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
 
@@ -17,11 +17,10 @@ const Task = ({ task, index, setTasks }) => {
     await axios.patch('http://localhost:8000/updateTask', {
       _id,
       text,
-      isCheck
     }).then(res => {
       setTasks(res.data.data);
-      setOpen(false)
-    })
+      setOpen(false);
+    });
   }
 
   const openEdit = (value, state) => {
@@ -33,7 +32,7 @@ const Task = ({ task, index, setTasks }) => {
     await axios.delete(`http://localhost:8000/deleteTask?_id=${_id}`)
       .then(res => {
         setTasks(res.data.data);
-      })
+      });
   }
 
   const editCheck = async () => {
@@ -42,17 +41,15 @@ const Task = ({ task, index, setTasks }) => {
       isCheck: !isCheck
     }).then(res => {
       setTasks(res.data.data);
-    })
+    });
   }
-
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   return (
     <div
       className="tasks"
-      key={`task-${index}`
-      }>
-      <Checkbox {...label}
+      key={`task-${index}`}
+    >
+      <Checkbox
         icon={<FavoriteBorderIcon />}
         checkedIcon={<FavoriteIcon />}
         checked={isCheck}
@@ -65,10 +62,10 @@ const Task = ({ task, index, setTasks }) => {
             <HighlightOffTwoToneIcon onClick={() => setOpen(!open)} />
           </div>
           : <div className="edit-close">
-            <p> {task.text} </p>
+            <p> {word} </p>
             <MenuOpenTwoToneIcon
               visibility={isCheck ? 'hidden' : 'visible'}
-              onClick={() => openEdit(task.text, !open)} />
+              onClick={() => openEdit(word, !open)} />
             <DeleteSweepTwoToneIcon onClick={() => deleteTask()} />
           </div>
       }
