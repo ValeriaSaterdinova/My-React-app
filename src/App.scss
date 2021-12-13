@@ -1,0 +1,180 @@
+body {
+  background-image: url(fon.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.added {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .MuiInput-underline.Mui-focused:after {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  }
+
+  .MuiInput-underline.MuiInput-underline:after {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  }
+
+  button {
+    font-family: "Playball", cursive;
+    color: rgba(0, 0, 0, 0.8);
+    text-transform: capitalize;
+    font-size: 1.2em;
+    border-color: rgba(0, 0, 0, 0.514);
+    box-shadow: 7px 6px 7px rgba(0, 0, 0, 0.6);
+    background-color: #e8e4e2bf;
+    height: 2em;
+    margin-left: 2%;
+  }
+
+  button:hover {
+    background-color: #e8e4e2bf;
+  }
+}
+
+h1 {
+  font-family: "Playball", cursive;
+  font-size: 6em;
+  color: #bbb894;
+  margin-bottom: 35px;
+  text-shadow: 4px 4px 4px #050505;
+}
+
+.allTask {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70vh;
+  margin-top: 3%;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  .tasks {
+    background-color: #ffffff8a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 2%;
+    box-shadow: 0 8px 4px rgba(0, 0, 0, 0.35), 0 0px 1px rgba(0, 0, 0, 0.2);
+
+    span {
+      color: #df779cde;
+      width: 2em;
+      height: 2em;
+
+      svg {
+        font-size: 1.7rem;
+      }
+    }
+
+    .edit-close {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 80%;
+
+      p {
+        font-family: "Playball", cursive;
+        font-size: x-large;
+        width: 80%;
+        margin: 0%;
+        margin-left: 0.5em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 80%;
+        max-height: 10%;
+        white-space: nowrap;
+        max-height: unset;
+      }
+
+      p:hover {
+        text-overflow: unset;
+        word-wrap: break-word;
+        max-height: unset;
+        white-space: unset;
+      }
+
+      svg {
+        width: 1.4em;
+        height: 1.4em;
+        margin-left: 0.5em;
+        color: #343434;
+      }
+    }
+
+    .edit-open {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 80%;
+
+      input {
+        font-size: 1em;
+        width: auto;
+        height: 1.5em;
+        margin: 0.6em;
+      }
+
+      input:focus {
+        border-color: 1px solid black;
+      }
+
+      svg {
+        width: 1.4em;
+        height: 1.4em;
+        color: #343434;
+      }
+    }
+  }
+}
+
+@media (max-device-width: 475px) {
+  h1 {
+    font-size: 4.5em;
+    margin-bottom: 25px;
+  }
+
+  .allTask {
+    width: 80vw;
+    margin-top: 5%;
+
+    .tasks .edit-open input {
+      font-size: 1em;
+      width: 70%;
+      height: 1.5em;
+      margin: 0.6em;
+    }
+  }
+}
+
+@media (max-device-width: 320px) {
+  h1 {
+    font-size: 4em;
+    margin-bottom: 15px;
+  }
+
+  .added button {
+    padding: 0%;
+  }
+}
