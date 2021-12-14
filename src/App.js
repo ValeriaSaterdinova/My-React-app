@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Task from './Task';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { 
+  Switch,
+  Route, 
+  Redirect 
+} from 'react-router-dom';
+import OpenEditComponent from './components/OpenEditComponent/OpenEditComponent';
+import HeaderComponent from './components/HeaderComponent/HeaderComponent';
+import AllTasksComponent from './components/AllTasksComponent/AllTasksComponent';
 import './App.scss';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [currentTask, setCurrent] = useState({});
   const [text, setText] = useState('');
 
   useEffect(() => {
@@ -30,36 +36,36 @@ const App = () => {
     }
   }
   return (
-    <div className='content'>
-      <header>
-        <h1>To-Do List</h1>
-        <div className='added'>
-          <TextField
-            id='standard-basic'
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            fullWidth
+    <Switch>
+      <Route path='/home'>
+        <div className='content'>
+          <header>
+            <h1>To-Do List</h1>
+            <HeaderComponent
+              text={text}
+              setText={setText}
+              addNewTask={addNewTask}
+            />
+          </header>
+          <AllTasksComponent
+            setCurrent={setCurrent}
+            tasks={tasks}
+            setTasks={setTasks}
           />
-          <Button
-            variant='contained'
-            onClick={() => addNewTask()}
-          >
-            Add
-          </Button>
         </div>
-      </header>
-      <div className='allTask'>
-        {
-          tasks.sort((a, b) => a.isCheck - b.isCheck)
-            .map((task, index) =>
-              <Task
-                task={task}
-                index={index}
-                setTasks={setTasks}
-              />)
-        }
-      </div>
-    </div>
+      </Route>
+      <Route path='/edit'>
+        <div className='EditPage'>
+        <h1> Edit task </h1>
+        <OpenEditComponent 
+          currentTask={currentTask}
+          setTasks={setTasks}
+        />
+        </div>
+      </Route>
+      <Redirect from='/' to='/home' />
+    </Switch>
+
   );
 }
 
