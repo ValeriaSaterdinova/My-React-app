@@ -54,8 +54,7 @@ const App = () => {
           />
         </div>
       </Route>
-      <Route path='/edit' 
-      >
+      <Route path='/edit'>
         <div className='EditPage'>
         <h1> Edit task </h1>
         <OpenEditComponent 
